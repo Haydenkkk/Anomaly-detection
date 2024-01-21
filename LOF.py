@@ -21,7 +21,7 @@ def calculate_reachability_density(X, k):
 
     for i in range(n):
         distances = pairwise_distances(X[i].reshape(1, -1), X).flatten()
-        neighbors_indices = np.argsort(distances)[1:k+1]  # 排除自身，选择最近的 k 个邻居
+        neighbors_indices = np.argsort(distances)[1:k+1]
 
         # 检查分母是否为零
         denominator = np.sum(distances[neighbors_indices])
@@ -38,8 +38,7 @@ def calculate_local_outlier_factor(X, k, lrd):
 
     for i in range(n):
         distances = pairwise_distances(X[i].reshape(1, -1), X).flatten()
-        neighbors_indices = np.argsort(distances)[1:k+1]  # 排除自身，选择最近的 k 个邻居
-
+        neighbors_indices = np.argsort(distances)[1:k+1]
         # 检查局部可达密度是否为零
         if lrd[i] == 0 or np.any(lrd[neighbors_indices] == 0):
             lof[i] = np.nan

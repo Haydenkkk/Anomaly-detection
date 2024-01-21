@@ -46,30 +46,23 @@ def perform_cblof(X, alpha=0.9, beta=5, n_clusters=10):
         min_distances_to_large_clusters = np.min(np.linalg.norm(centers[large_cluster_indices] - X_scaled[i], axis=1))
         cblof_scores[labels == i] = cluster_sizes[i] * min_distances_to_large_clusters
 
-
     # 根据异常值比例找到阈值
     threshold = np.percentile(cblof_scores, 1)
-
-    # 找到异常值的索引
     outlier_indices = np.where(cblof_scores < threshold)[0]
 
     return outlier_indices
 
 def plot_cblof_results(X, outlier_indices):
-    # 绘制图表
     plt.figure(figsize=(10, 8))
-
-    # 绘制正常值的散点图
+    # 正常值的散点图
     sns.scatterplot(x=X[:, 0], y=X[:, 1], edgecolor='white', label='Normal')
 
-    # 绘制异常值的散点图
+    # 异常值的散点图
     sns.scatterplot(x=X[outlier_indices, 0], y=X[outlier_indices, 1], label='Outlier')
 
     plt.axis('tight')
     plt.title('CBLOF', fontsize=20)
     plt.legend()
-
-    # 保存图表
     plt.savefig('img/CBLOF.png', dpi=300)
     # plt.show()
 

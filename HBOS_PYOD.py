@@ -28,13 +28,12 @@ y_pred = clf.predict(X)
 n_inliers = len(y_pred) - np.count_nonzero(y_pred)
 n_outliers = np.count_nonzero(y_pred == 1)
 outlier_indices = np.where(y_pred == 1)[0]
-# 绘制图表
+
+
 plt.figure(figsize=(10, 8))
-
-# 绘制正常值的散点图
+# 正常值的散点图
 b = sns.scatterplot(x=X_scaled[:, 0], y=X_scaled[:, 1], edgecolor='white')
-
-# 绘制异常值的散点图
+# 异常值的散点图
 c = sns.scatterplot(x=X_scaled[y_pred == 1, 0], y=X_scaled[y_pred == 1, 1])
 
 plt.axis('tight')
