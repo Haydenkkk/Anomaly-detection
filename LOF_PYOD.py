@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from pyod.models.lof import LOF
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -12,7 +12,7 @@ df = pd.read_csv("Superstore.csv")
 X = df[['Sales', 'Profit']]
 
 # 将特征进行标准化
-scaler = StandardScaler()
+scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
 # 创建并训练 LOF 模型

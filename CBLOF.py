@@ -55,7 +55,7 @@ def perform_cblof(X, alpha=0.9, beta=5, n_clusters=10):
 def plot_cblof_results(X, outlier_indices):
     plt.figure(figsize=(10, 8))
     # 正常值的散点图
-    sns.scatterplot(x=X[:, 0], y=X[:, 1], edgecolor='white', label='Normal')
+    sns.scatterplot(x=X[:, 0], y=X[:, 1],label='Normal')
 
     # 异常值的散点图
     sns.scatterplot(x=X[outlier_indices, 0], y=X[outlier_indices, 1], label='Outlier')

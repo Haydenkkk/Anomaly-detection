@@ -16,16 +16,15 @@ def knn_outlier_detection(data, k, aggregation='mean'):
     #             distances[i, j] = np.linalg.norm(data[i] - data[j])
     #             distances[j, i] = distances[i, j]
     
-    distances = cdist(data, data)
+    # distances = cdist(data, data)
 
-    # neighbors_model = NearestNeighbors(n_neighbors=k)
-    # neighbors_model.fit(data)
-    # distances, _ = neighbors_model.kneighbors(data)
+    neighbors_model = NearestNeighbors(n_neighbors=k)
+    neighbors_model.fit(data)
+    distances, _ = neighbors_model.kneighbors(data)
 
     # 排序选择最近的k个邻居
     sorted_distances = np.sort(distances, axis=1)
     k_nearest_neighbors = sorted_distances[:, 1:k+1]
-
     # 指定方法聚合
     if aggregation == 'mean':
         aggregated_distances = np.mean(k_nearest_neighbors, axis=1)
@@ -60,6 +59,7 @@ outlier_indices = data_to_analyze.index[data_to_analyze['IsOutlier']].tolist()
 
 
 print('异常值个数:', len(outlier_indices), '所有异常值的序号: \n', outlier_indices)
+# plt.style.use('Solarize_Light2')
 plt.figure(figsize=(10, 8))
 sns.scatterplot(x="Sales", y="Profit", hue='IsOutlier', data=data_to_analyze)
 

@@ -37,7 +37,7 @@ b = sns.scatterplot(x=X_scaled[:, 0], y=X_scaled[:, 1], edgecolor='white')
 c = sns.scatterplot(x=X_scaled[y_pred == 1, 0], y=X_scaled[y_pred == 1, 1])
 
 plt.axis('tight')
-plt.title('HBOS', fontsize=20)
+plt.title('HBOS-PYOD', fontsize=20)
 
 print('异常值数量: ', n_outliers)
 print('所有异常值的序号: \n', outlier_indices)
